@@ -10,16 +10,13 @@
   padding   : 0px;
 
 }
-
-.arrow {
-  border      : solid black;
-  border-width: 0 3px 3px 0;
-  display     : inline-block;
-  padding     : 3px;
-  margin-left : 10px;
+.Items{
+  padding: 5px;
 }
 
-.down {
-  transform        : rotate(45deg);
-  -webkit-transform: rotate(45deg);
+img {
+  width       : 20px;
+  padding-left: 10px;
+  /* width    : 100%;
+  height      : auto; */
 }

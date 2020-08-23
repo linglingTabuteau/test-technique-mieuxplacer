@@ -37,6 +37,7 @@ class DropDownList extends Component {
             <li
               key={item}
               onClick={() => this.handleSelectValue(item)}
+              className="Items"
             >{item}</li>
           )
         }
@@ -52,7 +53,7 @@ class DropDownList extends Component {
     return (
       <div className="DropDownList" onClick={this.handleDropDown}>
         {label}
-        <i className="arrow down"></i>
+        <img src="/assets/drop-down.png" alt="dropdown" />
         {list}
       </div>
     )
