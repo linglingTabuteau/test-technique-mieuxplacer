@@ -23,12 +23,15 @@ class DropDownList extends Component {
     this.setState({
       selectValue: value,
     })
+    if (this.props.onSelectItem) {
+      this.props.onSelectItem(value);
+    }
   }
 
   render() {
     let list = "";
     if (this.state.isOpen) {
-      list = (<ul>
+      list = (<ul className="List">
         {
           this.props.items.map(item =>
             <li
