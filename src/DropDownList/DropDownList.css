@@ -21,6 +21,7 @@
 }
 
 img {
-  width       : 20px;
-  padding-left: 10px;
+  width         : 20px;
+  padding-left  : 10px;
+  vertical-align: text-bottom;
 }
