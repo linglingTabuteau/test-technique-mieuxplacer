@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './DropDownList.css'
 
 
@@ -23,6 +24,7 @@ class DropDownList extends Component {
     this.setState({
       selectValue: value,
     })
+    // get the value
     if (this.props.onSelectItem) {
       this.props.onSelectItem(value);
     }
@@ -45,7 +47,7 @@ class DropDownList extends Component {
       )
     }
 
-    let label = "select your choices"
+    let label = this.props.placeholder;
     if (this.state.selectValue) {
       label = this.state.selectValue;
     }
@@ -59,6 +61,12 @@ class DropDownList extends Component {
     )
   }
 
+}
+
+DropDownList.propTypes = {
+  items: PropTypes.array.isRequired,
+  placeholder: PropTypes.string,
+  onSelectItem: PropTypes.func,
 }
 
 export default DropDownList;

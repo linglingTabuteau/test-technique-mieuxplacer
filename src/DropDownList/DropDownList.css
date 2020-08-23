@@ -1,7 +1,8 @@
 .DropDownList {
   border: 2px black solid;
   width : 180px;
-  margin: 20px;
+  margin: 10px;
+  cursor: pointer;
 }
 
 .List {
@@ -10,13 +11,16 @@
   padding   : 0px;
 
 }
-.Items{
+
+.Items {
   padding: 5px;
+}
+
+.Items:hover {
+  background-color: rgb(210, 210, 210);
 }
 
 img {
   width       : 20px;
   padding-left: 10px;
-  /* width    : 100%;
-  height      : auto; */
 }
