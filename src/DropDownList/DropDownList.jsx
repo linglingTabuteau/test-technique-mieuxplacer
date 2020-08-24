@@ -9,9 +9,11 @@ class DropDownList extends Component {
     this.state = {
       isOpen: false,
       selectValue: "",
+      cursor: 0,
     }
     this.handleDropDown = this.handleDropDown.bind(this);
     this.handleSelectValue = this.handleSelectValue.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
   }
 
   handleDropDown = () => {
@@ -30,16 +32,34 @@ class DropDownList extends Component {
     }
   }
 
+  handleKeyDown(e) {
+    const { cursor } = this.state
+    const { items } = this.props;
+    // arrow up/down button should select next/previous list element
+    if (e.keyCode === 38 && cursor > 0) {
+      this.setState(prevState => ({
+        cursor: prevState.cursor - 1
+      }));
+    } else if (e.keyCode === 40 && cursor < items.length - 1) {
+      this.setState(prevState => ({
+        cursor: prevState.cursor + 1
+      }));
+    } else if (e.keyCode === 13) {
+      let selectItem = items[cursor];
+      this.handleSelectValue(selectItem);
+    }
+  }
+
   render() {
     let list = "";
     if (this.state.isOpen) {
       list = (<ul className="List">
         {
-          this.props.items.map(item =>
+          this.props.items.map((item, index) =>
             <li
               key={item}
               onClick={() => this.handleSelectValue(item)}
-              className="Items"
+              className={`Items ${this.state.cursor === index ? 'active' : ''}`}
             >{item}</li>
           )
         }
@@ -53,7 +73,11 @@ class DropDownList extends Component {
     }
 
     return (
-      <div className="DropDownList" onClick={this.handleDropDown}>
+      <div
+        className="DropDownList"
+        onClick={this.handleDropDown}
+        onKeyDown={this.handleKeyDown}
+        tabIndex={-1}>
         {label}
         <img src="/assets/drop-down.png" alt="dropdown" />
         {list}
@@ -67,6 +91,7 @@ DropDownList.propTypes = {
   items: PropTypes.array.isRequired,
   placeholder: PropTypes.string,
   onSelectItem: PropTypes.func,
+  cursor: PropTypes.number,
 }
 
 export default DropDownList;
