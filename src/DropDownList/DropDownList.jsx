@@ -9,11 +9,13 @@ class DropDownList extends Component {
     this.state = {
       isOpen: false,
       selectValue: "",
-      cursor: 0,
+      cursor: -1,
     }
+
     this.handleDropDown = this.handleDropDown.bind(this);
     this.handleSelectValue = this.handleSelectValue.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.handleMouseOver = this.handleMouseOver.bind(this);
   }
 
   handleDropDown = () => {
@@ -50,6 +52,12 @@ class DropDownList extends Component {
     }
   }
 
+  handleMouseOver() {
+    this.setState({
+      cursor: -1
+    });
+  }
+
   render() {
     let list = "";
     if (this.state.isOpen) {
@@ -59,6 +67,7 @@ class DropDownList extends Component {
             <li
               key={item}
               onClick={() => this.handleSelectValue(item)}
+              // combine several className with space
               className={`Items ${this.state.cursor === index ? 'active' : ''}`}
             >{item}</li>
           )
@@ -77,6 +86,7 @@ class DropDownList extends Component {
         className="DropDownList"
         onClick={this.handleDropDown}
         onKeyDown={this.handleKeyDown}
+        onMouseOver={this.handleMouseOver}
         tabIndex={-1}>
         {label}
         <img src="/assets/drop-down.png" alt="dropdown" />
