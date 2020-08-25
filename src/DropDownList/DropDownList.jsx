@@ -12,11 +12,6 @@ class DropDownList extends Component {
       cursor: -1,
       isUseKeyboard: false,
     }
-
-    this.handleDropDown = this.handleDropDown.bind(this);
-    this.handleSelectValue = this.handleSelectValue.bind(this);
-    this.handleKeyDown = this.handleKeyDown.bind(this);
-    this.handleMouseOver = this.handleMouseOver.bind(this);
   }
 
   handleDropDown = () => {
@@ -35,7 +30,7 @@ class DropDownList extends Component {
     }
   }
 
-  handleKeyDown(e) {
+  handleKeyDown = (e) => {
     const { cursor } = this.state
     const { items } = this.props;
     // update state to use keyboard
@@ -57,7 +52,7 @@ class DropDownList extends Component {
     }
   }
 
-  handleMouseOver() {
+  handleMouseOver = () => {
     this.setState({
       cursor: -1,
       isUseKeyboard: false
@@ -74,7 +69,7 @@ class DropDownList extends Component {
               key={item}
               onClick={() => this.handleSelectValue(item)}
               // combine several className with space
-              className={`Items ${this.state.isUseKeyboard ? '': 'item-hover'} ${this.state.cursor === index ? 'active' : ''}`}
+              className={`Items ${this.state.isUseKeyboard ? '' : 'item-hover'} ${this.state.cursor === index ? 'active' : ''}`}
             >{item}</li>
           )
         }
