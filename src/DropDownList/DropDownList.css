@@ -16,7 +16,7 @@
   padding: 5px;
 }
 
-.Items:hover {
+.Items.item-hover:hover {
   background-color: rgb(210, 210, 210);
 }
 

@@ -10,6 +10,7 @@ class DropDownList extends Component {
       isOpen: false,
       selectValue: "",
       cursor: -1,
+      isUseKeyboard: false,
     }
 
     this.handleDropDown = this.handleDropDown.bind(this);
@@ -37,6 +38,10 @@ class DropDownList extends Component {
   handleKeyDown(e) {
     const { cursor } = this.state
     const { items } = this.props;
+    // update state to use keyboard
+    this.setState({
+      isUseKeyboard: true
+    });
     // arrow up/down button should select next/previous list element
     if (e.keyCode === 38 && cursor > 0) {
       this.setState(prevState => ({
@@ -54,7 +59,8 @@ class DropDownList extends Component {
 
   handleMouseOver() {
     this.setState({
-      cursor: -1
+      cursor: -1,
+      isUseKeyboard: false
     });
   }
 
@@ -68,7 +74,7 @@ class DropDownList extends Component {
               key={item}
               onClick={() => this.handleSelectValue(item)}
               // combine several className with space
-              className={`Items ${this.state.cursor === index ? 'active' : ''}`}
+              className={`Items ${this.state.isUseKeyboard ? '': 'item-hover'} ${this.state.cursor === index ? 'active' : ''}`}
             >{item}</li>
           )
         }
@@ -86,8 +92,10 @@ class DropDownList extends Component {
         className="DropDownList"
         onClick={this.handleDropDown}
         onKeyDown={this.handleKeyDown}
+        // to use event onKeyDown in div
+        tabIndex={-1}
         onMouseOver={this.handleMouseOver}
-        tabIndex={-1}>
+      >
         {label}
         <img src="/assets/drop-down.png" alt="dropdown" />
         {list}
