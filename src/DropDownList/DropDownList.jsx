@@ -60,6 +60,8 @@ class DropDownList extends Component {
   }
 
   render() {
+    const { placeholder } = this.props;
+    const { isUseKeyboard, cursor, selectValue } = this.state;
     let list = "";
     if (this.state.isOpen) {
       list = (<ul className="List">
@@ -69,7 +71,7 @@ class DropDownList extends Component {
               key={item}
               onClick={() => this.handleSelectValue(item)}
               // combine several className with space
-              className={`Items ${this.state.isUseKeyboard ? '' : 'item-hover'} ${this.state.cursor === index ? 'active' : ''}`}
+              className={`Items ${isUseKeyboard ? '' : 'item-hover'} ${cursor === index ? 'active' : ''}`}
             >{item}</li>
           )
         }
@@ -77,9 +79,9 @@ class DropDownList extends Component {
       )
     }
 
-    let label = this.props.placeholder;
-    if (this.state.selectValue) {
-      label = this.state.selectValue;
+    let label = placeholder;
+    if (selectValue) {
+      label = selectValue;
     }
 
     return (
