@@ -17,11 +17,13 @@
 }
 
 .Items.item-hover:hover {
-  background-color: rgb(210, 210, 210);
+  color      : rgb(34, 160, 65);
+  font-weight: bold;
 }
 
 .active {
-  background-color: rgb(210, 210, 210);
+  color      : rgb(34, 160, 65);
+  font-weight: bold;
 }
 
 img {
