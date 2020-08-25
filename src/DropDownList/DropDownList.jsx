@@ -101,7 +101,6 @@ DropDownList.propTypes = {
   items: PropTypes.array.isRequired,
   placeholder: PropTypes.string,
   onSelectItem: PropTypes.func,
-  cursor: PropTypes.number,
 }
 
 export default DropDownList;
