@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import DropDownList from './DropDownList/DropDownList';
 
+
 let list = ["item 1", "item 2", "item 3", "item 4"];
-function App() {
+const App = () => {
   return (
-    <div className="App">
+    <div
+      className="App">
       <DropDownList
         items={list}
         placeholder="Choose an item"
-        onSelectItem={(item) => alert(item)} />
+        onSelectItem={(item:string) => alert(item)}
+      />
     </div>
   );
 }

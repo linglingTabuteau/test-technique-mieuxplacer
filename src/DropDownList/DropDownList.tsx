@@ -2,17 +2,30 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './DropDownList.css'
 
+interface MyProps {
+  items: string[],
+  placeholder: string,
+  onSelectItem: (value: string) => void
+}
 
-class DropDownList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isOpen: false,
-      selectValue: "",
-      cursor: -1,
-      isUseKeyboard: false,
-    }
+type MyState = {
+  isOpen: boolean,
+  selectValue: string,
+  cursor: number,
+  isUseKeyBoard: boolean,
+}
+
+// <T, U> => Generics define types in Component
+class DropDownList extends Component<MyProps, MyState>{
+  // constructor(props) {
+  //   super(props);
+  state = {
+    isOpen: false,
+    selectValue: "",
+    cursor: -1,
+    isUseKeyBoard: false,
   }
+  // }
 
   handleDropDown = () => {
     this.setState(prevState => ({
@@ -20,7 +33,7 @@ class DropDownList extends Component {
     }))
   }
 
-  handleSelectValue = (value) => {
+  handleSelectValue = (value: string) => {
     this.setState({
       selectValue: value,
     })
@@ -30,12 +43,12 @@ class DropDownList extends Component {
     }
   }
 
-  handleKeyDown = (e) => {
+  handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     const { cursor } = this.state
     const { items } = this.props;
     // update state to use keyboard
     this.setState({
-      isUseKeyboard: true
+      isUseKeyBoard: true
     });
     // arrow up/down button should select next/previous list element
     if (e.keyCode === 38 && cursor > 0) {
@@ -55,14 +68,14 @@ class DropDownList extends Component {
   handleMouseOver = () => {
     this.setState({
       cursor: -1,
-      isUseKeyboard: false
+      isUseKeyBoard: false
     });
   }
 
   render() {
     const { placeholder } = this.props;
-    const { isUseKeyboard, cursor, selectValue } = this.state;
-    let list = "";
+    const { isUseKeyBoard, cursor, selectValue } = this.state;
+    let list: JSX.Element|undefined;
     if (this.state.isOpen) {
       list = (<ul className="List">
         {
@@ -71,7 +84,7 @@ class DropDownList extends Component {
               key={item}
               onClick={() => this.handleSelectValue(item)}
               // combine several className with space
-              className={`Items ${isUseKeyboard ? '' : 'item-hover'} ${cursor === index ? 'active' : ''}`}
+              className={`Items ${isUseKeyBoard ? '' : 'item-hover'} ${cursor === index ? 'active' : ''}`}
             >{item}</li>
           )
         }
@@ -102,10 +115,10 @@ class DropDownList extends Component {
 
 }
 
-DropDownList.propTypes = {
-  items: PropTypes.array.isRequired,
-  placeholder: PropTypes.string,
-  onSelectItem: PropTypes.func,
-}
+// DropDownList.propTypes = {
+//   items: PropTypes.array.isRequired,
+//   placeholder: PropTypes.string,
+//   onSelectItem: PropTypes.func,
+// }
 
 export default DropDownList;
